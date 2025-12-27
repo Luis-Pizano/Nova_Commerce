@@ -1,8 +1,10 @@
 const Home = () => {
   return (
-    <h1 style={{ display: "flex", justifyContent: "center" }}>
-      Home
-    </h1>
+    <div className="flex justify-center items-center h-screen">
+      <h1 className="text-black text-4xl font-bold">
+        Home
+      </h1>
+    </div>
   );
 };
 
