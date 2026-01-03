@@ -39,24 +39,20 @@ const Sidebar = () => {
                         <i className="fa-solid fa-tags w-6 text-center text-lg"></i>
                         {isOpen && <span>Nuestras Marcas</span>}</a></li>
 
-                {/* Registro */}
+                {/* Registro y Login */}
                 <li className="">
                     <a href="/login-or-register" className="flex items-center gap-2.5 hover:text-gray-300">
                         <i className="fa-solid fa-user-plus w-6 text-center"></i>
-                        {isOpen && <span>Registro</span>}
+                        {isOpen && <span>Acceder</span>}
                     </a></li>
+
+                {/* Cargar Categorias */}
                 <li className="">
                     <a href="#" className="flex items-center gap-2.5 hover:text-gray-300">
                         <i className="fa-solid fa-plus w-6 text-center"></i>
                         {isOpen && <span>Categoria</span>}
                     </a></li>
 
-                {/* Login */}
-                <li className="">
-
-                    <a href="#" className="flex items-center gap-2.5 hover:text-gray-300">
-                    <i className="fa-solid fa-door-open w-6 text-center"></i>
-                    {isOpen && <span>Login</span>}</a></li>
 
                 {/* Administración con submenú */}
                 <li className="relative">
