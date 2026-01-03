@@ -47,10 +47,35 @@ app.post('/api/registro', async (req, res) => {
         console.error(`Error en el registro, Error: ${error}`)
     }
 
-
-
 })
 
+app.post('/api/cargar_categorias',upload.single('imagen'), async (req, res) => {
+    const {nombre,descripcion} = req.body;
+    try {
+        const file = req.file;
+        await sql.connect(dbConfig);
+
+        const request = new sql.Request();
+        request.input('nombre',sql.VarChar(),nombre);
+        request.input('descripcion',sql.VarChar(),descripcion);
+        request.input('imagen',sql.VarBinary(sql.MAX),file.buffer);
+        await request.query('INSERT INTO CATEGORIAS (NOMBRE, DESCRIPCION, IMAGEN) VALUES (@nombre, @descripcion, @imagen)');
+
+        res.status(200).json({ Message: 'Categoria cargada exitosamente.' });
+    } catch (error) {
+        console.error(`Error al cargar categoria, Error: ${error}`);
+    }
+})
+
+app.get('/api/obtener_categorias', async (req, res) => {
+    try {
+        await sql.connect(dbConfig);
+        const result = await sql.query('SELECT * FROM CATEGORIAS');
+        res.status(200).json(result.recordset);
+    } catch (error) {
+        console.error(`Error al obtener categorias, Error: ${error}`);
+    }
+})
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
