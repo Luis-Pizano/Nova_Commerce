@@ -49,6 +49,8 @@ app.post('/api/registro', async (req, res) => {
 
 })
 
+// ================================ Catergorias APIs ==================================
+
 app.post('/api/cargar_categorias',upload.single('imagen'), async (req, res) => {
     const {nombre,descripcion} = req.body;
     try {
@@ -76,6 +78,8 @@ app.get('/api/obtener_categorias', async (req, res) => {
         console.error(`Error al obtener categorias, Error: ${error}`);
     }
 })
+
+// ================================ END Catergorias APIs ==================================
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
