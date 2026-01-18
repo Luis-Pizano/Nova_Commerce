@@ -12,12 +12,12 @@ const Sidebar = () => {
     return (
         <nav className={isOpen ? "w-50 h-screen bg-black text-white p-4 transform transition-width duration-300"
             : "w-12 h-screen  bg-black text-white transition-width duration-300"}>
-            <div className=" absolute top-3 left-1.5 text-2xl cursor-pointer" onClick={() => setIsOpen(!isOpen)}><i class="fa-solid fa-bars  w-6 text-center"></i></div>
+            <div className=" absolute top-3 left-1.5 text-2xl cursor-pointer" onClick={() => setIsOpen(!isOpen)}><i className="fa-solid fa-bars  w-6 text-center"></i></div>
             <h2 className="text-xl font-bold p-14 flex justify-center">{isOpen && <a href="/">Nova Commerce</a>}</h2>
             <ul className="space-y-8">
                 {/* Productos */}
                 <li className="">
-                    <a href="#" className="flex items-center gap-2.5 hover:text-gray-300">
+                    <a href="/cargar_productos" className="flex items-center gap-2.5 hover:text-gray-300">
                         <i className="fa-solid fa-box w-6 text-center text-lg"></i>
                         {isOpen && <span>Productos</span>}</a></li>
 
@@ -48,7 +48,7 @@ const Sidebar = () => {
 
                 {/* Cargar Categorias */}
                 <li className="">
-                    <a href="#" className="flex items-center gap-2.5 hover:text-gray-300">
+                    <a href="/cargar_categorias" className="flex items-center gap-2.5 hover:text-gray-300">
                         <i className="fa-solid fa-plus w-6 text-center"></i>
                         {isOpen && <span>Categoria</span>}
                     </a></li>
@@ -61,7 +61,7 @@ const Sidebar = () => {
                     <i className="fa-solid fa-gear w-6 text-center" title="Administración"></i>
                     {isOpen && <span>Administración</span>}</button>
                     {isOpenAdministration && isOpen && (
-                        <ul className=" absolute mt-2 ml-8 bottom-full space-y-4 bg-gray-700 p-4 rounded shadow-lg z-20 max-h-[500px] overflow-y-auto">
+                        <ul className=" absolute mt-2 ml-8 bottom-full space-y-4 bg-gray-700 p-4 rounded shadow-lg z-20 max-h-500px overflow-y-auto">
                             <li><a href="#"  className="flex items-center gap-2.5 hover:text-gray-300">
                                 {isOpen && <span>Agregar Productos</span>} </a>
                             </li>
