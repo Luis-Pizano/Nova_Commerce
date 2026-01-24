@@ -17,7 +17,7 @@ const Sidebar = () => {
             <ul className="space-y-8">
                 {/* Productos */}
                 <li className="">
-                    <a href="/cargar_productos" className="flex items-center gap-2.5 hover:text-gray-300">
+                    <a href="#" className="flex items-center gap-2.5 hover:text-gray-300">
                         <i className="fa-solid fa-box w-6 text-center text-lg"></i>
                         {isOpen && <span>Productos</span>}</a></li>
 
@@ -62,11 +62,15 @@ const Sidebar = () => {
                     {isOpen && <span>Administración</span>}</button>
                     {isOpenAdministration && isOpen && (
                         <ul className=" absolute mt-2 ml-8 bottom-full space-y-4 bg-gray-700 p-4 rounded shadow-lg z-20 max-h-500px overflow-y-auto">
-                            <li><a href="#"  className="flex items-center gap-2.5 hover:text-gray-300">
+
+                            {/* Cargar Productos */}
+                            <li><a href="/cargar_productos"  className="flex items-center gap-2.5 hover:text-gray-300">
                                 {isOpen && <span>Agregar Productos</span>} </a>
                             </li>
-                            <li><a href="#"  className="flex items-center gap-2.5 hover:text-gray-300">
-                                {isOpen && <span>Agregar Productos</span>} </a>
+                            
+                            {/* Cargar Marcas */}
+                            <li><a href="/cargar_marcas"  className="flex items-center gap-2.5 hover:text-gray-300">
+                                {isOpen && <span>Agregar Marcas</span>} </a>
                             </li>
 
                         </ul>
@@ -74,13 +78,10 @@ const Sidebar = () => {
                     
                 </li>
             </ul>
-            <a
-                href="#"
-                className="absolute bottom-5 left-1.5 py-2 px-3 hover:bg-red-800
-                 rounded flex items-center gap-2.5 transition-colors">
-
-                <i className="fa-solid fa-arrow-right-from-bracket w-6 text-center" title="Logout"/>
-                {isOpen && <span>Logout</span>}
+            <a href="#" className="absolute bottom-5 left-1.5 py-2 px-3 hover:bg-red-800 rounded 
+            flex items-center gap-2.5 transition-colors"> 
+            <i className="fa-solid fa-arrow-right-from-bracket w-6 text-center" title="Logout"/> 
+            {isOpen && <span>Logout</span>}
             </a>
 
 

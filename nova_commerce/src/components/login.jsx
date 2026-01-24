@@ -49,7 +49,8 @@ const Login = () => {
         <div className="flex justify-center items-center h-screen bg-gray-100">
             {isLogin ? (
                 <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
-                    <form>
+                    <form onSubmit={(e) => e.preventDefault()}>
+
                         {/* Login */}
                         <h2 className="text-2xl font-bold mb-6 text-center">Iniciar Sesión</h2>
                         {/* Correo */}
