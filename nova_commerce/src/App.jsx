@@ -14,7 +14,7 @@ function App() {
       <div className="flex">
         <Sidebar />
 
-        <main className="flex-1 min-h-screen ">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden p-4 bg-gray-100 h-screen">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cargar_categorias" element={<Cargar_Categorias />} />

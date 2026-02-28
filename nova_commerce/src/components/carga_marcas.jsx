@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 
 
 const Marcas = () => {
-    const { id } = useParams();
 
     const [marcaId, setMarcaId] = useState(null);
 
@@ -181,7 +180,7 @@ const Marcas = () => {
                         <h2 className="text-xl font-bold mb-4">Eliminar Marca {formdata.nombre}</h2>
                         <form onSubmit={Delete_Marca}>
                             <div className="flex justify-between">
-                                <a className="bg-blue-500 text-white py-1 px-2 rounded-md hover:bg-blue-600 cursor-pointer" onClick={CloseDeleteModal}> Cancelar</a>
+                                <a className="bg-gray-500 text-white py-1 px-2 rounded-md hover:bg-gray-600 cursor-pointer" onClick={CloseDeleteModal}> Cancelar</a>
                                 <button type="submit" className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 cursor-pointer">Eliminar</button>
                             </div>
                         </form>

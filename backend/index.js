@@ -83,7 +83,7 @@ app.get('/api/obtener_categorias', async (req, res) => {
         const result = await sql.query('SELECT * FROM CATEGORIAS');
 
         const categorias = result.recordset.map(img => ({
-            ...img,IMAGEN: img.IMAGEN ? Buffer.from(img.IMAGEN).toString('base64') : null
+            ...img, IMAGEN: img.IMAGEN ? Buffer.from(img.IMAGEN).toString('base64') : null
         }));
 
         res.status(200).json(categorias);
@@ -93,14 +93,50 @@ app.get('/api/obtener_categorias', async (req, res) => {
     }
 });
 
+app.put('/api/actualizar_categoria/:id', upload.single('file'), async (req, res) => {
+    const { id } = req.params;
+    const { nombre, descripcion } = req.body;
+    const fileBuffer = req.file ? req.file.buffer : null;
+    const mimeType = req.file ? req.file.mimetype : null;
+    try {
+        await sql.connect(dbConfig);
+        const request = new sql.Request();
+        request.input('id', sql.Int, id);
+        request.input('nombre', sql.VarChar(), nombre);
+        request.input('descripcion', sql.VarChar(), descripcion);
+        request.input('imagen', sql.VarBinary(sql.MAX), fileBuffer);
+        request.input('mime_type', sql.NVarChar(50), mimeType);
 
+        await request.query('UPDATE CATEGORIAS SET NOMBRE = @nombre, DESCRIPCION = @descripcion, IMAGEN = @imagen, MIME_TYPE = @mime_type WHERE ID = @id');
+        res.status(200).json({ Message: 'Categoria actualizada exitosamente.' });
+    } catch (error) {
+        console.error(`Error al actualizar categoria, Error: ${error}`);
+    }
+
+
+
+});
+
+app.delete('/api/eliminar_categoria/:id', async (req, res) => {
+    const { id } = req.params;
+    
+    try {
+        await sql.connect(dbConfig);
+        const request = new sql.Request();
+        request.input('id', sql.Int, id);
+        await request.query('DELETE FROM CATEGORIAS WHERE ID = @id');
+        res.status(200).json({ Message: 'Categoria eliminada exitosamente.' });
+    } catch (error) {
+        console.error(`Error al eliminar categoria, Error: ${error}`);
+    }
+});
 // ================================ END Catergorias APIs ==================================
 
 
 // ================================ Marcas APIs ==================================
 
 app.post('/api/cargar_marcas', async (req, res) => {
-    const { nombre} = req.body;
+    const { nombre } = req.body;
     try {
         await sql.connect(dbConfig);
         const request = new sql.Request();
@@ -113,7 +149,7 @@ app.post('/api/cargar_marcas', async (req, res) => {
     }
 })
 
-app.get('/api/obtener_marcas', async (req,res) =>{
+app.get('/api/obtener_marcas', async (req, res) => {
     try {
         await sql.connect(dbConfig);
         const result = await sql.query('SELECT * FROM MARCAS');
@@ -170,7 +206,7 @@ app.post('/api/cargar_productos', upload.single('file'), async (req, res) => {
         request.input('marcaID', sql.Int, marcaID);
         request.input('imagen', sql.VarBinary(sql.MAX), fileBuffer);
         request.input('mime_type', sql.NVarChar(50), mimeType);
-        
+
         await request.query('INSERT INTO PRODUCTOS (NOMBRE, DESCRIPCION, PRECIO, CATEGORIA_ID, MARCA_ID, IMAGEN, MIME_TYPE) VALUES (@nombre, @descripcion, @precio, @categoriaId, @marcaID, @imagen, @mime_type)');
         res.status(200).json({ Message: 'Producto cargado exitosamente.' });
     } catch (error) {
@@ -183,7 +219,7 @@ app.get('/api/obtener_productos', async (req, res) => {
         await sql.connect(dbConfig);
         const result = await sql.query('SELECT * FROM PRODUCTOS');
         const productos = result.recordset.map(img => ({
-            ...img,IMAGEN: img.IMAGEN ? Buffer.from(img.IMAGEN).toString('base64') : null
+            ...img, IMAGEN: img.IMAGEN ? Buffer.from(img.IMAGEN).toString('base64') : null
         }));
         res.status(200).json(productos);
     } catch (error) {
